@@ -1,0 +1,8 @@
+<p>recipes!</p>
+<ul *ngIf="recipes; else loadingBlock">
+    <li *ngFor="let i of recipes">
+        <img src="{{ i.recipe.image }}" alt="">
+        <a [routerLink]="['/recipe', i.recipe.uri]">{{ i.recipe.label }}</a>
+    </li>
+</ul>
+<ng-template #loadingBlock>Loading...</ng-template>
