@@ -1,8 +1,40 @@
-<p>recipes!</p>
-<ul *ngIf="recipes; else loadingBlock">
-    <li *ngFor="let i of recipes">
-        <img src="{{ i.recipe.image }}" alt="">
-        <a [routerLink]="['/recipe', i.recipe.uri]">{{ i.recipe.label }}</a>
-    </li>
-</ul>
-<ng-template #loadingBlock>Loading...</ng-template>
+<form #recipeForm="ngForm" (ngSubmit)="onSubmit(recipeForm)">
+
+    <input type="radio" name="mealtype" id="breakfast" value="breakfast" ngModel>
+    <label for="breakfast">Breakfast</label>
+    <input type="radio" name="mealtype" id="lunch/dinner" value="lunch/dinner" ngModel>
+    <label for="lunch/dinner">Lunch/Dinner</label>
+    <input type="radio" name="mealtype" id="snack" value="snack" ngModel>
+    <label for="snack">snack</label>
+    <div>
+        <label for="Vegetarian">Vegetarian</label>
+        <input type="checkbox" name="Vegetarian" id="vegetarian" ngModel>
+
+        <label for="Gluten-Free">Gluten-Free</label>
+        <input type="checkbox" name="Glutenfree" id="glutenfree" ngModel>
+
+        <label for="Peanut-Free">Peanut-Free</label>
+        <input type="checkbox" name="Peanutfree" id="peanutfree" ngModel>
+    </div>
+    <button type="submit">Filter Recipes</button>
+</form>
+<div *ngIf="!filtering else filteredBlock">
+    <ul *ngIf="recipes; else loadingBlock">
+        <li *ngFor="let i of recipes | slice:0:7">
+            <!-- <img src="{{ i.recipe.image }}" alt=""> -->
+            <a [routerLink]="['/recipe', i.recipe.uri]">{{ i.recipe.label }}</a>
+        </li>
+    </ul>
+    <ng-template #loadingBlock>
+        <p>Loading...</p>
+    </ng-template>
+</div>
+
+<ng-template #filteredBlock>
+    <ul *ngIf="recipes; else loadingBlock">
+        <li *ngFor="let i of filteredRecipes">
+            <!-- <img src="{{ i.recipe.image }}" alt=""> -->
+            <a [routerLink]="['/recipe', i.recipe.uri]">{{ i.recipe.label }}</a>
+        </li>
+    </ul>
+</ng-template>
