@@ -38,7 +38,7 @@ export class RecipesComponent implements OnInit {
         }
       if (key !== "mealtype") {
         // console.log(recipe.recipe.healthLabels)
-        if (recipe.recipe.healthLabels.indexOf(key) !== -1){
+        if (recipe.recipe.healthLabels.indexOf(limiters[key]) !== -1){
           trueCounter++;
         }
       }
