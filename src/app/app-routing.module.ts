@@ -10,12 +10,13 @@ const routes: Routes = [
   {path: 'recipes', component: RecipesComponent },
   {path: 'saved', component: SavedComponent },
   {path: 'recipe/:uri', component: RecipeComponent },
-// redirectto, pathmatch, routeguard (canactivate)
-  {path: '**', component: NotFoundComponent, data: {title: 'Ooops'} }
+  {path: '**', component: NotFoundComponent, data: {title: 'Ooops'} }   // how tf do i access title
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+     scrollPositionRestoration: 'enabled'    // sounds good, doesn't work
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

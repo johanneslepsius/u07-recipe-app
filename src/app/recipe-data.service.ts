@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class RecipeDataService {
     return this.http.get<any>('http://localhost:3000/hits')
   }
   getRecipe(uri: string): Observable<[any]> {
-    return this.http.get<any>(`https://api.edamam.com/search?r=${uri}&app_id=412c10ab&app_key=2382a0e38c595f09a346292710a732e4`)
+    return this.http.get<any>(`https://api.edamam.com/search?r=${uri}&app_id=${environment.app_id}&app_key=${environment.app_key}`)
   }
   
   /*selectRecipe(recipeObj: Object) {

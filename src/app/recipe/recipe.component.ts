@@ -30,7 +30,10 @@ export class RecipeComponent implements OnInit {
   }
 
   saveRecipe() {
-    this.recipeDataService.savedRecipes.push(this.recipe)
+    let uri = decodeURIComponent(this.uri)
+    if (this.recipeDataService.savedRecipes.findIndex(i => i.uri === uri) === -1){
+      this.recipeDataService.savedRecipes.push(this.recipe)
+    }
   }
 
 }
