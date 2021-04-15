@@ -11,7 +11,7 @@ export class RecipesComponent implements OnInit {
   recipes: [{}];
   filteredRecipes;
   // when false, the recipes-component shows the 8 first results of the api-answer, 
-  // when true (the user is actively searching for recips) all matching results are shown. 
+  // when true (the user is actively searching for recipes) all matching results are shown. 
   // look in html to understand.
   filtering = false;
 
@@ -21,29 +21,19 @@ export class RecipesComponent implements OnInit {
     ) { }
 
   filterRecipe(recipe, limiters) {
-    // debugger;
     let trueCounter = 0;
-    // console.log(recipe)
     for (let key in limiters){
       if (key === "mealtype") {
-        // console.log(recipe.recipe.hasOwnProperty('mealType'))
-        // debugger;
           if (recipe.recipe.hasOwnProperty('mealType') && recipe.recipe.mealType.indexOf(limiters[key]) !== -1){
-            // console.log(limiters[key]);
-            // if (recipe.recipe.mealType.indexOf(limiters[key]) !== -1){
             trueCounter++;
-            // console.log("hello i exist");
-            // }
           }
         }
       if (key !== "mealtype") {
-        // console.log(recipe.recipe.healthLabels)
         if (recipe.recipe.healthLabels.indexOf(limiters[key]) !== -1){
           trueCounter++;
         }
       }
     }
-    // console.log()
     return trueCounter === Object.keys(limiters).length;
   }
 
@@ -66,7 +56,6 @@ export class RecipesComponent implements OnInit {
     this.filteredRecipes = this.recipes.filter(recipe => {
       return this.filterRecipe(recipe, limiters)
     })
-    console.log(limiters);
   }
 
   ngOnInit() {
@@ -80,28 +69,3 @@ export class RecipesComponent implements OnInit {
   }
 
 }
-
-// https://stackoverflow.com/questions/31831651/javascript-filter-array-multiple-conditions
-
-/*const isMealOK = (meal, limiters) => {
-    let manyCorrects = 0;
-    for (let obj of limiters){
-    if (meal[obj.limit] === obj.value) manyCorrects++
-};
-return manyCorrects === limiters.length
-}
-
-const limiters = [{limit: 'type', value: 'a'}]
-
-const filteredMeals2 = arrObjs.filter(item => {
-    return isMealOK(item, limiters)
-})
-
-sätta recipes till filteredmeals
-
-https://angular.io/guide/forms
-
-bättre länk!
-
-https://www.tektutorialshub.com/angular/angular-template-driven-forms/
-*/

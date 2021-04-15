@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RecipeDataService {
-  recipe: {}
+  recipe: {};
+  savedRecipes: any = [];
   constructor(private http: HttpClient) { }
 
   // fixa recipe-interface

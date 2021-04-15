@@ -1,1 +1,15 @@
-<p>{{ recipe.label }}</p>
+<img src="{{ recipe.image }}" alt="">
+<p>{{ recipe.label }} by {{ recipe.source }}</p>
+<p>Serves {{ recipe.yield }}</p>
+<button (click)="saveRecipe()">Save Recipe</button>
+
+<ul>
+    <li *ngFor="let i of recipe.ingredients">{{ i.text }}</li>
+</ul>
+
+<h3>But how do I make this?</h3>
+<p>“A home cook who relies too much on a recipe is sort of like a pilot who reads
+    the plane’s instruction manual while flying.”</p>
+<p><b>- Alton Brown</b></p>
+<p>...</p>
+<p>Totally not because this API sucks and does not provide a recipe.</p>

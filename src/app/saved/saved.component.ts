@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RecipeDataService } from '../recipe-data.service';
 
 @Component({
   selector: 'app-saved',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./saved.component.css']
 })
 export class SavedComponent implements OnInit {
+  recipes: [];
 
-  constructor() { }
+  constructor(private recipeDataService: RecipeDataService) { }
 
   ngOnInit(): void {
+    this.recipes = this.recipeDataService.savedRecipes;
+    console.log(this.recipes)
   }
 
 }

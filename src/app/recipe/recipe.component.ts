@@ -8,8 +8,8 @@ import { RecipeDataService } from '../recipe-data.service';
   styleUrls: ['./recipe.component.css']
 })
 export class RecipeComponent implements OnInit {
-  uri: any
-  recipe: any
+  uri: any;
+  recipe: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,10 +23,14 @@ export class RecipeComponent implements OnInit {
 
       this.recipeDataService.getRecipe(this.uri)
         .subscribe(data => {
-          console.log(data)
-          this.recipe = data[0]
+          this.recipe = data[0];
+          console.log(this.recipe)
         })
     
+  }
+
+  saveRecipe() {
+    this.recipeDataService.savedRecipes.push(this.recipe)
   }
 
 }
