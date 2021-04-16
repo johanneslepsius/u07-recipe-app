@@ -13,7 +13,6 @@ export class SavedComponent implements OnInit {
 
   ngOnInit(): void {
     this.recipes = this.recipeDataService.savedRecipes;
-    console.log(this.recipes)
   }
 
   removeRecipe(evt) {

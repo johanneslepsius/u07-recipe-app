@@ -10,15 +10,11 @@ const routes: Routes = [
   {path: 'recipes', component: RecipesComponent },
   {path: 'saved', component: SavedComponent },
   {path: 'recipe/:uri', component: RecipeComponent },
-  {path: '**', component: NotFoundComponent, data: {title: 'Ooops'} }   // how tf do i access title
+  {path: '**', component: NotFoundComponent, data: {title: 'Ooops'} } // gotta think about sending data here
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-     scrollPositionRestoration: 'enabled'    // sounds good, doesn't work
-  })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-// kanske fler routingmoduler?

@@ -21,14 +21,10 @@ export class RecipesComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    // console.log()
     this.recipeDataService.getRecipes()
       .subscribe(data => {
         this.recipes = data
-        console.log(data)
       })
-    // this.recipes = this.recipes.hits
-    console.log(typeof(this.recipes));
   }
 
   filterRecipe(recipe, limiters) {

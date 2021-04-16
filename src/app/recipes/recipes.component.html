@@ -36,7 +36,6 @@
     <div *ngIf="!filtering else filteredBlock">
         <ul *ngIf="recipes; else loadingBlock">
             <li *ngFor="let i of recipes.hits | slice:0:7">
-                <!-- <img src="{{ i.recipe.image }}" alt=""> -->
                 <a [routerLink]="['/recipe', i.recipe.uri]">{{ i.recipe.label }}</a>
             </li>
         </ul>
@@ -48,7 +47,6 @@
     <ng-template #filteredBlock>
         <ul *ngIf="recipes; else loadingBlock">
             <li *ngFor="let i of filteredRecipes">
-                <!-- <img src="{{ i.recipe.image }}" alt=""> -->
                 <a [routerLink]="['/recipe', i.recipe.uri]">{{ i.recipe.label }}</a>
             </li>
         </ul>

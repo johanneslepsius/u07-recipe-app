@@ -19,7 +19,6 @@ export class RecipeComponent implements OnInit {
   ngOnInit(): void {
     
       this.uri = encodeURIComponent(this.route.snapshot.paramMap.get('uri'));
-      // console.log(this.uri)
 
       this.recipeDataService.getRecipe(this.uri)
         .subscribe(data => {

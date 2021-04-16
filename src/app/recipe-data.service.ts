@@ -11,7 +11,7 @@ export class RecipeDataService {
   savedRecipes: any = [];
   constructor(private http: HttpClient) { }
 
-  // fixa recipe-interface
+  // kanske fixa recipe-interface
 
   getRecipes(): Observable<[any]> {
     return this.http.get<any>(`https://api.edamam.com/search?q=apple&app_id=${environment.app_id}&app_key=${environment.app_key}&from=0&to=10`)
