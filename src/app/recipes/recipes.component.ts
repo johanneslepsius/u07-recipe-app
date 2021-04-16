@@ -8,7 +8,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent implements OnInit {
-  recipes: [{}];
+  recipes: any;
   filteredRecipes;
   // when false, the recipes-component shows the 8 first results of the api-answer, 
   // when true (the user is actively searching for recipes) all matching results are shown. 
@@ -19,6 +19,17 @@ export class RecipesComponent implements OnInit {
     private recipeDataService: RecipeDataService,
     private route: ActivatedRoute
     ) { }
+
+  ngOnInit() {
+    // console.log()
+    this.recipeDataService.getRecipes()
+      .subscribe(data => {
+        this.recipes = data
+        console.log(data)
+      })
+    // this.recipes = this.recipes.hits
+    console.log(typeof(this.recipes));
+  }
 
   filterRecipe(recipe, limiters) {
     let trueCounter = 0;
@@ -53,19 +64,11 @@ export class RecipesComponent implements OnInit {
       }
     }
     
-    this.filteredRecipes = this.recipes.filter(recipe => {
+    this.filteredRecipes = this.recipes.hits.filter(recipe => {
       return this.filterRecipe(recipe, limiters)
     })
   }
 
-  ngOnInit() {
-    this.recipeDataService.getRecipes()
-      .subscribe(data => {
-        this.recipes = data
-        console.log(data)
-      })
-
-    console.log(this.recipes);
-  }
+  
 
 }

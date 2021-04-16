@@ -14,19 +14,12 @@ export class RecipeDataService {
   // fixa recipe-interface
 
   getRecipes(): Observable<[any]> {
-    return this.http.get<any>('http://localhost:3000/hits')
+    return this.http.get<any>(`https://api.edamam.com/search?q=apple&app_id=${environment.app_id}&app_key=${environment.app_key}&from=0&to=10`)
   }
   getRecipe(uri: string): Observable<[any]> {
     return this.http.get<any>(`https://api.edamam.com/search?r=${uri}&app_id=${environment.app_id}&app_key=${environment.app_key}`)
   }
   
-  /*selectRecipe(recipeObj: Object) {
-    this.recipe = recipeObj;
-  }
-  getRecipe(): Object {
-    return this.recipe;
-  }
-  */
 }
-// https://api.edamam.com/search?q=apple&app_id=412c10ab&app_key=2382a0e38c595f09a346292710a732e4&from=0&to=99
+
 

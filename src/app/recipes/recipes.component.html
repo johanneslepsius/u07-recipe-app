@@ -1,40 +1,60 @@
-<form #recipeForm="ngForm" (ngSubmit)="onSubmit(recipeForm)">
+<div id="frontpage">
+    <form #recipeForm="ngForm" (ngSubmit)="onSubmit(recipeForm)">
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="mealtype" id="breakfast" value="breakfast" ngModel>
+                <label class="form-check-label" for="breakfast">Breakfast</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="mealtype" id="lunch/dinner" value="lunch/dinner"
+                    ngModel>
+                <label class="form-check-label" for="lunch/dinner">Lunch/Dinner</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="mealtype" id="snack" value="snack" ngModel>
+                <label class="form-check-label" for="snack">Snack</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="Vegan" id="Vegan" ngModel>
+                <label class="form-check-label" for="Vegan">Vegan</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="Gluten-Free" id="glutenfree" ngModel>
+                <label class="form-check-label" for="Gluten-Free">Gluten-Free</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="Peanut-Free" id="peanutfree" ngModel>
+                <label class="form-check-label" for="Peanut-Free">Peanut-Free</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success my-1">Filter Recipes</button>
+    </form>
 
-    <input type="radio" name="mealtype" id="breakfast" value="breakfast" ngModel>
-    <label for="breakfast">Breakfast</label>
-    <input type="radio" name="mealtype" id="lunch/dinner" value="lunch/dinner" ngModel>
-    <label for="lunch/dinner">Lunch/Dinner</label>
-    <input type="radio" name="mealtype" id="snack" value="snack" ngModel>
-    <label for="snack">Snack</label>
-    <div>
-        <label for="Vegan">Vegan</label>
-        <input type="checkbox" name="Vegan" id="Vegan" ngModel>
 
-        <label for="Gluten-Free">Gluten-Free</label>
-        <input type="checkbox" name="Gluten-Free" id="glutenfree" ngModel>
-
-        <label for="Peanut-Free">Peanut-Free</label>
-        <input type="checkbox" name="Peanut-Free" id="peanutfree" ngModel>
+    <div *ngIf="!filtering else filteredBlock">
+        <ul *ngIf="recipes; else loadingBlock">
+            <li *ngFor="let i of recipes.hits | slice:0:7">
+                <!-- <img src="{{ i.recipe.image }}" alt=""> -->
+                <a [routerLink]="['/recipe', i.recipe.uri]">{{ i.recipe.label }}</a>
+            </li>
+        </ul>
+        <ng-template #loadingBlock>
+            <p>Loading...</p>
+        </ng-template>
     </div>
-    <button type="submit">Filter Recipes</button>
-</form>
-<div *ngIf="!filtering else filteredBlock">
-    <ul *ngIf="recipes; else loadingBlock">
-        <li *ngFor="let i of recipes | slice:0:7">
-            <!-- <img src="{{ i.recipe.image }}" alt=""> -->
-            <a [routerLink]="['/recipe', i.recipe.uri]">{{ i.recipe.label }}</a>
-        </li>
-    </ul>
-    <ng-template #loadingBlock>
-        <p>Loading...</p>
+
+    <ng-template #filteredBlock>
+        <ul *ngIf="recipes; else loadingBlock">
+            <li *ngFor="let i of filteredRecipes">
+                <!-- <img src="{{ i.recipe.image }}" alt=""> -->
+                <a [routerLink]="['/recipe', i.recipe.uri]">{{ i.recipe.label }}</a>
+            </li>
+        </ul>
     </ng-template>
 </div>
 
-<ng-template #filteredBlock>
-    <ul *ngIf="recipes; else loadingBlock">
-        <li *ngFor="let i of filteredRecipes">
-            <!-- <img src="{{ i.recipe.image }}" alt=""> -->
-            <a [routerLink]="['/recipe', i.recipe.uri]">{{ i.recipe.label }}</a>
-        </li>
-    </ul>
-</ng-template>
+
+<!-- finns det aktiva filter? spara filtrerade recept i service & filter i service -->
+<!-- recipe som childcomponent på denna sida -->

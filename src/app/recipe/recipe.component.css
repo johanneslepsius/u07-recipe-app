@@ -1,0 +1,13 @@
+#recipe {
+  width: 80vw;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+#recipe *:not(ul li) {
+  margin: 10px 0;
+}
+
+.list-group {
+  width: 100%;
+}
