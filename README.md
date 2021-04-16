@@ -1,27 +1,17 @@
 # RecipeApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.0.
+A very simple app built with Angular 11 and Bootstrap 5 (via CDN, don't worry) that gets recipe data from the edamam-API and lets you filter recipes and save them while you are on the page.
 
-## Development server
+To try it:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. clone the repo: git clone https://github.com/chas-academy/u07-recipe-app-johanneslepsius
+2. npm install
+3. Add your edamam api key to \src\environments\environment.ts (create this folder and file yourself):
 
-## Code scaffolding
+export const environment = {
+production: false,
+app_id: 'your_id',
+app_key: 'your_key'
+};
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. Run `ng serve`, go to `http://localhost:4200/` and you should be good to go!
