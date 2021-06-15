@@ -14,7 +14,7 @@ export class RecipeDataService {
   // kanske fixa recipe-interface
 
   getRecipes(): Observable<[any]> {
-    return this.http.get<any>(`https://api.edamam.com/search?q=apple&app_id=${environment.app_id}&app_key=${environment.app_key}&from=0&to=10`)
+    return this.http.get<any>(`https://api.edamam.com/search?q=apple&app_id=${environment.app_id}&app_key=${environment.app_key}&from=0&to=99`)
   }
   getRecipe(uri: string): Observable<[any]> {
     return this.http.get<any>(`https://api.edamam.com/search?r=${uri}&app_id=${environment.app_id}&app_key=${environment.app_key}`)
