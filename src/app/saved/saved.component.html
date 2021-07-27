@@ -3,7 +3,7 @@
     <ul>
         <li *ngFor="let i of recipes">
             <a [routerLink]="['/recipe', i.uri]">{{i.label}}</a>
-            <button id="{{ i.uri }}" (click)="removeRecipe($event)" class="btn btn-danger">Remove</button>
+            <button id="{{ i.uri }}" (click)="removeRecipe(i.uri)" class="btn btn-danger">Remove</button>
         </li>
     </ul>
 </div>

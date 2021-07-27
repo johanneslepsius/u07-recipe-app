@@ -15,8 +15,8 @@ export class SavedComponent implements OnInit {
     this.recipes = this.recipeDataService.savedRecipes;
   }
 
-  removeRecipe(evt) {
-    let uri = evt.originalTarget.id;
+  removeRecipe(uri) {
+    // let uri = evt.originalTarget.id;
     let i = this.recipeDataService.savedRecipes.findIndex(i => i.uri === uri);
     this.recipeDataService.savedRecipes.splice(i, 1);
   }
