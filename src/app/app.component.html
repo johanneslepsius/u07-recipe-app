@@ -8,8 +8,14 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link" routerLink="/recipes">Recipes</a>
-                <a class="nav-link" routerLink="/saved">Saved Recipes</a>
-                <button type="button" (click)="logout()">Log Out</button>
+                <ng-container *ngIf="!this.userService.loggedIn else loggedIn">
+                    <a class="nav-link" routerLink="/login">Log In</a>
+                    <a class="nav-link" routerLink="/register">Register</a>
+                </ng-container>
+                <ng-template #loggedIn>
+                    <a class="nav-link" routerLink="/saved">Saved Recipes</a>
+                    <a id="logoutbtn" class="nav-link" (click)="logout()">Log Out</a>
+                </ng-template>
             </div>
         </div>
     </div>

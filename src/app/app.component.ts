@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title = 'recipe-app';
 
   constructor(
-    private userService: UserService,
+    public userService: UserService,
   ){}
 
   ngOnInit() {
@@ -21,8 +21,9 @@ export class AppComponent implements OnInit {
   logout() {
     this.userService.logout().subscribe(
       data => {
-        // localStorage.removeItem('token');
-        console.log("hello, bitch");
+        localStorage.removeItem('token');
+        this.userService.loggedIn = false;
+        console.log(data);
       }
     )
   }

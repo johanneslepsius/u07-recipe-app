@@ -11,6 +11,7 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { TokenHttpInterceptor } from './tokenHttpInterceptor';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TokenHttpInterceptor } from './tokenHttpInterceptor';
     RecipesComponent,
     RecipeComponent,
     NotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

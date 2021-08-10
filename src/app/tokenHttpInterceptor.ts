@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
         });
 
         if (req.headers.get('skip')) {
-            req.headers.delete('skip');
+            req = req.clone({ headers: req.headers.delete('skip') })
             console.log(req);
             return next.handle(req);
         }

@@ -19,17 +19,19 @@ export class LoginComponent implements OnInit {
 
   
 
-  onSubmit(loginForm): any {
+  submitLog(loginForm): any {
     console.log(loginForm);
     this.userService.login(loginForm.email, loginForm.password).subscribe(
       data => {
         if (data.message === "Login Successful")
           this.userService.loggedIn = true;
           localStorage.setItem("token", data.token);
+          this.userService.user = data.user;
           console.log(data);
           console.log(this.userService.loggedIn);
       }
     );
   }
+
 
 }
