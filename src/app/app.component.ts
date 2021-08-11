@@ -26,6 +26,10 @@ export class AppComponent implements OnInit {
         localStorage.removeItem('token');
         this.userService.loggedIn = false;
         console.log(data);
+      },
+      err => {
+        localStorage.removeItem('token');
+        this.userService.loggedIn = false;
       }
     )
   }

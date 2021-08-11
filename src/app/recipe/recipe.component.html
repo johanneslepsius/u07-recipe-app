@@ -2,7 +2,7 @@
     <img src="{{ recipe.image }}" alt="">
     <h2 class="display-6">{{ recipe.label }} by {{ recipe.source }}</h2>
     <p><b>Serves {{ recipe.yield }}</b></p>
-    <button (click)="saveRecipe()" class="btn btn-success">Save Recipe</button>
+    <button (click)="saveRecipe()" class="btn btn-success" [disabled]="btntxt === 'Saved!'">{{ btntxt }}</button>
     <ul class="list-group">
         <li *ngFor="let i of recipe.ingredients" class="list-group-item">{{ i.text }}</li>
     </ul>
