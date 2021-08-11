@@ -1,9 +1,10 @@
 <div class="login">
-    <form #regForm="ngForm" (ngSubmit)="submitLog(regForm.value)">
+    <form #loginForm="ngForm" (ngSubmit)="submitLog(loginForm.value)">
         <div class="form-group row">
             <label for="email" class="col-sm-2 col-form-label">Email address</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" ngModel>
+                <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" email
+                    required ngModel>
             </div>
 
         </div>
@@ -11,10 +12,12 @@
             <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
                 <input type="password" class="form-control" name="password" id="password" placeholder="Password"
-                    ngModel>
+                    required minlength="6" ngModel>
+                <div *ngIf="this.failedLogin" class="text-danger">Something went wrong, please try another username or
+                    password!</div>
 
             </div>
         </div>
-        <button type="submit" class="btn btn-success my-1">Login</button>
+        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success my-1">Login</button>
     </form>
 </div>

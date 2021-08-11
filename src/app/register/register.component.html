@@ -26,9 +26,11 @@
 
             </div>
         </div>
-        <div *ngIf="regForm.errors?.minlength">
+        <div *ngIf="regForm.errors?.minlength" class="text-danger">
             Password must be at least 6 characters long.
         </div>
+        <div *ngIf="this.failedReg" class="text-danger">Something went wrong, please try another username or
+            password!</div>
         <button type="submit" class="btn btn-success my-1" [disabled]="!regForm.valid">Register</button>
     </form>
 </div>

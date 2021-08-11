@@ -15,7 +15,9 @@ export class AppComponent implements OnInit {
   ){}
 
   ngOnInit() {
-    
+    if(localStorage.getItem('token')) {
+      this.userService.loggedIn = true;
+    }
   }
 
   logout() {

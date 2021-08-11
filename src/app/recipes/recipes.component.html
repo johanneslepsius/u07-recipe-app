@@ -35,7 +35,7 @@
 
     <div *ngIf="!filtering else filteredBlock">
         <ul *ngIf="recipes; else loadingBlock">
-            <li *ngFor="let i of recipes.hits | slice:0:7">
+            <li *ngFor="let i of recipes.hits">
                 <a [routerLink]="['/recipe', i.recipe.uri]">{{ i.recipe.label }}</a>
             </li>
         </ul>

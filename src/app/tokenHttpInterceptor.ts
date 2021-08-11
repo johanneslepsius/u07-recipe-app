@@ -8,6 +8,10 @@ import { Observable } from 'rxjs';
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        if (req.url.indexOf('edamam')) {
+            return next.handle(req);
+        }
+
         const token = localStorage.getItem('token');
 
         const modifiedReq = req.clone({

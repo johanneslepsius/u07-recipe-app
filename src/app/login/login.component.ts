@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 // import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -10,8 +11,11 @@ import { UserService } from '../user.service';
 
 export class LoginComponent implements OnInit {
 
+  failedLogin: boolean = false;
+
   constructor(
-    private userService: UserService, 
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -20,15 +24,17 @@ export class LoginComponent implements OnInit {
   
 
   submitLog(loginForm): any {
-    console.log(loginForm);
+    this.failedLogin = false;
     this.userService.login(loginForm.email, loginForm.password).subscribe(
       data => {
-        if (data.message === "Login Successful")
           this.userService.loggedIn = true;
           localStorage.setItem("token", data.token);
           this.userService.user = data.user;
-          console.log(data);
           console.log(this.userService.loggedIn);
+          this.router.navigate(['recipes']);
+        },
+      err => {
+        this.failedLogin = true;
       }
     );
   }
