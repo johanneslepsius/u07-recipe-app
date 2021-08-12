@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipeDataService } from '../recipe-data.service';
+import { RecipeDataService, Recipelist } from '../recipe-data.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-saved',
@@ -7,18 +8,87 @@ import { RecipeDataService } from '../recipe-data.service';
   styleUrls: ['./saved.component.css']
 })
 export class SavedComponent implements OnInit {
-  recipes: [];
+  recipes: Array<object>;
+  lists: Array<Recipelist>;
+  create_d: string = 'Create';
+  createError: boolean = false;
 
-  constructor(private recipeDataService: RecipeDataService) { }
+  constructor(
+    private recipeDataService: RecipeDataService,
+    private modalService: NgbModal
+    ) { }
 
   ngOnInit(): void {
-    this.recipes = this.recipeDataService.savedRecipes;
+    this.getLists();
+  }
+
+  ngAfterViewChecked() {
+    const activeButtons = document.querySelectorAll('.active');
+    console.log(activeButtons.length)
+    if (activeButtons.length === 0) {
+      this.activate(this.lists[0].id);
+    }
+  }
+
+  open(createListModal): any {
+    this.modalService.open(createListModal).result.then((result) => {
+      console.log(result);
+    }, (reason) => {
+      console.log(reason);
+    });
+  }
+
+  activate(id) {
+    console.log(id);
+    const activeButtons = document.querySelectorAll('button.active.nav-link');
+    activeButtons?.forEach(el => {
+      el.className = 'nav-link';
+    });
+    const activeButton = document.getElementById(id);
+    console.log(activeButton)
+    activeButton.className = 'nav-link active';
+  }
+
+  getLists() {
+    this.recipeDataService.getLists().subscribe(
+      data => {
+        // console.log(data);
+        this.lists = data;
+        this.getRecipes(data[0].id);
+      },
+      err => {
+
+      }
+    );
+  }
+
+  createList(form) {
+    this.create_d = 'Creating...';
+    this.recipeDataService.createList(form.listName).subscribe(
+      data => {
+        this.create_d = 'Created!';
+        this.getLists();
+      },
+      err => {
+        this.createError = true;
+      }
+    );
+    
+  }
+
+  getRecipes(id: number) {
+    this.recipeDataService.getSavedRecipes(id).subscribe(
+          data => {
+            console.log(data);
+            this.recipes = data;
+          },
+          err => {
+
+          }
+        );
   }
 
   removeRecipe(uri) {
-    // let uri = evt.originalTarget.id;
-    let i = this.recipeDataService.savedRecipes.findIndex(i => i.uri === uri);
-    this.recipeDataService.savedRecipes.splice(i, 1);
   }
 
 }
