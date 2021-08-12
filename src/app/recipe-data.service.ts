@@ -25,8 +25,8 @@ export class RecipeDataService {
     return this.http.get<any>(`${environment.user_api}/recipelists`);
   }
 
-  saveRecipe() {
-    return this.http.post
+  saveRecipe(recipelist:string, recipe_url: string, recipe_label: string) {
+    return this.http.post<any>(`${environment.user_api}/save`, {'recipelist': recipelist, 'recipe_url': recipe_url, 'recipe_label': recipe_label});
   }
   
 }

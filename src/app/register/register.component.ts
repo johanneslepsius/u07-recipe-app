@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
 
   
   submitReg(regForm): any {
+    localStorage.clear();
     this.failedReg = false;
     this.userService.register(regForm.email, regForm.name, regForm.password).subscribe(
       data => {

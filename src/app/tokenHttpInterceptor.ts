@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (req.url.indexOf('edamam')) {
+        if (req.url.indexOf('edamam') !== -1) {
+            console.log("fool")
             return next.handle(req);
         }
 
@@ -24,6 +25,7 @@ import { Observable } from 'rxjs';
             return next.handle(req);
         }
 
+        console.log(modifiedReq)
         return next.handle(modifiedReq);
     }
 
