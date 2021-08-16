@@ -10,6 +10,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class SavedComponent implements OnInit {
   recipes: Array<object>;
   lists: Array<Recipelist>;
+  currentList: number;
   create_d: string = 'Create';
   createError: boolean = false;
 
@@ -24,7 +25,6 @@ export class SavedComponent implements OnInit {
 
   ngAfterViewChecked() {
     const activeButtons = document.querySelectorAll('.active');
-    console.log(activeButtons.length)
     if (activeButtons.length === 0) {
       this.activate(this.lists[0].id);
     }
@@ -39,7 +39,6 @@ export class SavedComponent implements OnInit {
   }
 
   activate(id) {
-    console.log(id);
     const activeButtons = document.querySelectorAll('button.active.nav-link');
     activeButtons?.forEach(el => {
       el.className = 'nav-link';
@@ -55,6 +54,7 @@ export class SavedComponent implements OnInit {
         // console.log(data);
         this.lists = data;
         this.getRecipes(data[0].id);
+        this.currentList = data[0].id;
       },
       err => {
 
@@ -77,6 +77,7 @@ export class SavedComponent implements OnInit {
   }
 
   getRecipes(id: number) {
+    this.currentList = id;
     this.recipeDataService.getSavedRecipes(id).subscribe(
           data => {
             console.log(data);
@@ -88,7 +89,15 @@ export class SavedComponent implements OnInit {
         );
   }
 
-  removeRecipe(uri) {
+  removeRecipe(id: number) {
+    this.recipeDataService.deleteRecipe(id).subscribe(
+          data => {
+            this.getRecipes(this.currentList);
+          },
+          err => {
+
+          }
+        );
   }
 
 }

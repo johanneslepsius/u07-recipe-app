@@ -4,7 +4,7 @@
     <ul class="nav nav-tabs">
         <ng-container *ngIf="lists.length >= 1">
             <li *ngFor="let i of lists" class="nav-item">
-                <button class="nav-link" id="{{ i.id }}" (click)="activate(i.id) && getRecipes(i.id)">{{ i.name
+                <button class="nav-link" id="{{ i.id }}" (click)="activate(i.id);getRecipes(i.id)">{{ i.name
                     }}</button>
             </li>
         </ng-container>
@@ -16,7 +16,7 @@
     <ul>
         <li *ngFor="let i of recipes">
             <a [routerLink]="['/recipe', i.uri]">{{i.label}}</a>
-            <button id="{{ i.uri }}" (click)="removeRecipe(i.uri)" class="btn btn-danger">Remove</button>
+            <button id="{{ i.uri }}" (click)="removeRecipe(i.id)" class="btn btn-danger">Remove</button>
         </li>
     </ul>
 

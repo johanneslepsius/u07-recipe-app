@@ -44,6 +44,10 @@ export class RecipeDataService {
   createList(name: string) {
     return this.http.post<any>(`${environment.user_api}/recipelists`, {'name': name});
   }
+
+  deleteRecipe(id: number) {
+    return this.http.delete<any>(`${environment.user_api}/save/${id}`);
+  }
   
 }
 
