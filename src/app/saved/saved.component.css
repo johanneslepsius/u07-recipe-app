@@ -7,3 +7,20 @@
 button {
   margin-left: 10px;
 }
+
+.options {
+  height: 15px;
+  margin-left: 5px;
+  position: relative;
+  left: -25px;
+  bottom: -15px;
+}
+
+.options:hover {
+  filter: invert(0.5) sepia(1) saturate(5) hue-rotate(300deg);
+  cursor: pointer;
+}
+
+.navflex {
+  display: flex;
+}

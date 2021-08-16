@@ -11,6 +11,7 @@ export class SavedComponent implements OnInit {
   recipes: Array<object>;
   lists: Array<Recipelist>;
   currentList: number;
+  clickedList: number;
   create_d: string = 'Create';
   createError: boolean = false;
 
@@ -25,15 +26,17 @@ export class SavedComponent implements OnInit {
 
   ngAfterViewChecked() {
     const activeButtons = document.querySelectorAll('.active');
-    if (activeButtons.length === 0) {
+    if (activeButtons.length === 0 && this.lists[0]) {
       this.activate(this.lists[0].id);
     }
   }
 
   open(createListModal): any {
     this.modalService.open(createListModal).result.then((result) => {
+      
       console.log(result);
     }, (reason) => {
+      this.create_d = 'Create';
       console.log(reason);
     });
   }
@@ -53,8 +56,11 @@ export class SavedComponent implements OnInit {
       data => {
         // console.log(data);
         this.lists = data;
-        this.getRecipes(data[0].id);
+        if(data[0]) {
+          this.getRecipes(data[0].id);
         this.currentList = data[0].id;
+        }
+        
       },
       err => {
 
@@ -89,10 +95,24 @@ export class SavedComponent implements OnInit {
         );
   }
 
-  removeRecipe(id: number) {
+  deleteRecipe(id: number) {
     this.recipeDataService.deleteRecipe(id).subscribe(
           data => {
             this.getRecipes(this.currentList);
+          },
+          err => {
+
+          }
+        );
+  }
+
+  deleteRecipelist() {
+    let id = this.clickedList;
+    console.log(id);
+    this.recipeDataService.deleteRecipelist(id).subscribe(
+          data => {
+            this.getLists();
+            this.recipes = null;
           },
           err => {
 
