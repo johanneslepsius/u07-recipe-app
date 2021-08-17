@@ -2,7 +2,7 @@
     <img src="{{ recipe.image }}" alt="">
     <h2 class="display-6">{{ recipe.label }} <i>by <b>{{ recipe.source }}</b></i></h2>
     <p><b>Serves {{ recipe.yield }}</b></p>
-    <button type="button" (click)="open(listModal)" class="btn btn-success" [disabled]="this.btntxt === 'Saved!'">{{
+    <button *ngIf="this.userService.loggedIn" type="button" (click)="open(listModal)" class="btn btn-success">{{
         btntxt
         }}</button>
     <ul class="list-group">

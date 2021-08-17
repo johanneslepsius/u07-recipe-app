@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RecipeDataService } from '../recipe-data.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-recipe',
@@ -20,7 +21,8 @@ export class RecipeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private recipeDataService: RecipeDataService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public userService: UserService
     ) {}
 
   ngOnInit(): void {
@@ -62,6 +64,7 @@ export class RecipeComponent implements OnInit {
     this.modalService.open(listModal).result.then((result) => {
       console.log(result);
     }, (reason) => {
+      this.save_d = 'Save';
       console.log(reason);
     });
   }
