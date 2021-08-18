@@ -19,8 +19,6 @@ export class RecipeDataService {
 
   constructor(private http: HttpClient) { }
 
-  // kanske fixa recipe-interface
-
   getRecipes(): Observable<[any]> {
     return this.http.get<any>(`${environment.recipe_api}/search?q=apple&app_id=${environment.app_id}&app_key=${environment.app_key}&from=0&to=99`)
   }

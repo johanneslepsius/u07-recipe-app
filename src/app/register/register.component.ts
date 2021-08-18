@@ -25,7 +25,6 @@ export class RegisterComponent implements OnInit {
     this.failedReg = false;
     this.userService.register(regForm.email, regForm.name, regForm.password).subscribe(
       data => {
-        console.log(data);
         localStorage.setItem('token', data.token);
         this.userService.loggedIn = true;
         this.router.navigate(['/recipes']);

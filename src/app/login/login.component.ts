@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
           this.userService.loggedIn = true;
           localStorage.setItem("token", data.token);
           this.userService.user = data.user;
-          console.log(this.userService.loggedIn);
           this.router.navigate(['recipes']);
         },
       err => {

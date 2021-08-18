@@ -18,11 +18,6 @@ interface User {
   updated_at: string
 }
 
-// this.skipToken.set('skip', 'true');
-
-// let headers = new HttpHeaders()
-  // .set('Authorization', `Bearer ${localStorage.token}`);
-
 @Injectable({
   providedIn: 'root'
 })

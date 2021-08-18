@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeDataService, Recipelist } from '../recipe-data.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-saved',
@@ -33,11 +33,8 @@ export class SavedComponent implements OnInit {
 
   open(createListModal): any {
     this.modalService.open(createListModal).result.then((result) => {
-      
-      console.log(result);
     }, (reason) => {
       this.create_d = 'Create';
-      console.log(reason);
     });
   }
 
@@ -47,14 +44,12 @@ export class SavedComponent implements OnInit {
       el.className = 'nav-link';
     });
     const activeButton = document.getElementById(id);
-    console.log(activeButton)
     activeButton.className = 'nav-link active';
   }
 
   getLists() {
     this.recipeDataService.getLists().subscribe(
       data => {
-        // console.log(data);
         this.lists = data;
         if(data[0]) {
           this.getRecipes(data[0].id);
@@ -86,7 +81,6 @@ export class SavedComponent implements OnInit {
     this.currentList = id;
     this.recipeDataService.getSavedRecipes(id).subscribe(
           data => {
-            console.log(data);
             this.recipes = data;
           },
           err => {
@@ -108,7 +102,6 @@ export class SavedComponent implements OnInit {
 
   deleteRecipelist() {
     let id = this.clickedList;
-    console.log(id);
     this.recipeDataService.deleteRecipelist(id).subscribe(
           data => {
             this.getLists();

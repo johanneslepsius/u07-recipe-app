@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (req.url.indexOf('edamam') !== -1) {
-            console.log("fool")
             return next.handle(req);
         }
 
@@ -20,12 +19,9 @@ import { Observable } from 'rxjs';
         });
 
         if (req.headers.get('skip')) {
-            req = req.clone({ headers: req.headers.delete('skip') })
-            console.log(req);
+            req = req.clone({ headers: req.headers.delete('skip') });
             return next.handle(req);
         }
-
-        console.log(modifiedReq)
         return next.handle(modifiedReq);
     }
 

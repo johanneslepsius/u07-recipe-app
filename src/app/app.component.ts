@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { UserService } from './user.service';
 
 @Component({
@@ -25,7 +24,6 @@ export class AppComponent implements OnInit {
       data => {
         localStorage.removeItem('token');
         this.userService.loggedIn = false;
-        console.log(data);
       },
       err => {
         localStorage.removeItem('token');
