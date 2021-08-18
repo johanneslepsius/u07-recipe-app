@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +28,7 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         localStorage.setItem('token', data.token);
         this.userService.loggedIn = true;
+        this.router.navigate(['/recipes']);
       },
       err => {
         this.failedReg = true;
